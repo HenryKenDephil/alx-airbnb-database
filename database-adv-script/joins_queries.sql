@@ -19,7 +19,8 @@ ON users.user_ID = bookings.bookings_ID;
 
 SELECT * FROM properties
 LEFT JOIN reviews
-ON reviews.properties_ID = properties.properties_ID;
+ON reviews.properties_ID = properties.properties_ID
+ORDER BY reviews;
 
 
 SELECT * users, bookings FROM users, bookings
