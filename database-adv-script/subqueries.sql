@@ -7,9 +7,20 @@ Write a query to find all properties where the average rating is greater than 4.
 Write a correlated subquery to find users who have made more than 3 bookings.
 */
 
-SELECT * FROM properties WHERE avg_rating > 4.0
-ORDER BY avg_rating;
+SELECT * FROM properties as properties
+WHERE (
+    SELECT AVG(r.rating)
+    FROM reviews as r
+    WHERE r.property_id = p.id
+
+    ) > 4.0
+ORDER BY r;
 
 
-SELECT * FROM users WHERE bookings > 3
-ORDER BY bookings;
+SELECT * FROM users as users
+WHERE (
+    SELECT COUNT(b.id)
+    FROM bookings as b 
+    WHERE b.user_id = u.id
+) > 3
+ORDER BY b;
