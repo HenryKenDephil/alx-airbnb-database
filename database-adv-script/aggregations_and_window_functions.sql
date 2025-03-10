@@ -14,8 +14,8 @@ GROUP BY b.user_id;
 
 --use of window function
 SELECT p.id, p.name, COUNT(b.id) AS total_bookings,
-    RANK()V OVER(ORDER BY COUNT(b.id) DESC) AS ranking
-FROM properties as properties
+    ROW_NUMBER()V OVER(ORDER BY COUNT(b.id) DESC) AS ranking
+FROM properties as p
 LEFT JOIN bookings as b ON p.id = b.property_id
 GROUP BY p.id, p.name
 ORDER BY ranking;
